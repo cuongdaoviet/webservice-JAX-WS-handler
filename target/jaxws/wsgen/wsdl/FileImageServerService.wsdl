@@ -6,31 +6,31 @@
       <xsd:import namespace="http://mtom.jaxws.ws.techiekernel.com/" schemaLocation="FileImageServerService_schema1.xsd"/>
     </xsd:schema>
   </types>
-  <message name="downloadImage">
-    <part name="parameters" element="tns:downloadImage"/>
-  </message>
-  <message name="downloadImageResponse">
-    <part name="parameters" element="tns:downloadImageResponse"/>
-  </message>
   <message name="uploadImage">
     <part name="parameters" element="tns:uploadImage"/>
   </message>
   <message name="uploadImageResponse">
     <part name="parameters" element="tns:uploadImageResponse"/>
   </message>
+  <message name="downloadImage">
+    <part name="parameters" element="tns:downloadImage"/>
+  </message>
+  <message name="downloadImageResponse">
+    <part name="parameters" element="tns:downloadImageResponse"/>
+  </message>
   <portType name="FileImageServer">
-    <operation name="downloadImage">
-      <input message="tns:downloadImage"/>
-      <output message="tns:downloadImageResponse"/>
-    </operation>
     <operation name="uploadImage">
       <input message="tns:uploadImage"/>
       <output message="tns:uploadImageResponse"/>
     </operation>
+    <operation name="downloadImage">
+      <input message="tns:downloadImage"/>
+      <output message="tns:downloadImageResponse"/>
+    </operation>
   </portType>
   <binding name="FileImageServerPortBinding" type="tns:FileImageServer">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-    <operation name="downloadImage">
+    <operation name="uploadImage">
       <soap:operation soapAction=""/>
       <input>
         <soap:body use="literal"/>
@@ -39,7 +39,7 @@
         <soap:body use="literal"/>
       </output>
     </operation>
-    <operation name="uploadImage">
+    <operation name="downloadImage">
       <soap:operation soapAction=""/>
       <input>
         <soap:body use="literal"/>

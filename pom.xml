@@ -67,6 +67,6 @@
 				</executions>
 			</plugin>
 		</plugins>
-		<finalName>webservice-JAX-WS-Web-Metro</finalName>
+		<finalName>webservice-JAX-WS-handler</finalName>
 	</build>
 </project>

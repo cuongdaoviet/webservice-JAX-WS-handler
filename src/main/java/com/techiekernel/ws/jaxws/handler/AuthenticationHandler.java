@@ -40,7 +40,7 @@ public class AuthenticationHandler implements SOAPHandler<SOAPMessageContext> {
 				if (soapHeader == null) {
 					soapHeader = soapEnv.addHeader();
 					// No header found, throw exception
-					returnSOAPException(soapMsg, "Missing Header", "ERR:001");
+					embedSOAPException(soapMsg, "Missing Header", "ERR:001");
 				}
 
 				// Get user Id and password from SOAP header
@@ -49,7 +49,7 @@ public class AuthenticationHandler implements SOAPHandler<SOAPMessageContext> {
 
 				// if no header block for next actor found? throw exception
 				if (it == null || !it.hasNext()) {
-					returnSOAPException(soapMsg, "No Header Data", "ERR:002");
+					embedSOAPException(soapMsg, "No Header Data", "ERR:002");
 				}
 
 				String userName = null;
@@ -64,13 +64,13 @@ public class AuthenticationHandler implements SOAPHandler<SOAPMessageContext> {
 				}
 
 				if (userName == null || password == null) {
-					returnSOAPException(soapMsg, "No userName or password.",
+					embedSOAPException(soapMsg, "No userName or password.",
 							"ERR:003");
 				}
 
 				// the auth code
-				if (!userName.equals("foo") || password.equals("bar")) {
-					returnSOAPException(soapMsg, "Authentication Failed",
+				if (!userName.equals("foo") || !password.equals("bar")) {
+					embedSOAPException(soapMsg, "Authentication Failed",
 							"ERR:004");
 				}
 
@@ -79,8 +79,10 @@ public class AuthenticationHandler implements SOAPHandler<SOAPMessageContext> {
 
 			} catch (SOAPException e) {
 				System.err.println(e);
+				return false;
 			} catch (IOException e) {
 				System.err.println(e);
+				return false;
 			}
 
 		}
@@ -105,16 +107,15 @@ public class AuthenticationHandler implements SOAPHandler<SOAPMessageContext> {
 		return null;
 	}
 
-	private void returnSOAPException(SOAPMessage msg, String reason,
-			String faultCode) {
-		try {
-			SOAPBody soapBody = msg.getSOAPPart().getEnvelope().getBody();
-			SOAPFault soapFault = soapBody.addFault();
-			soapFault.setFaultString(reason);
-			soapFault.setFaultCode(faultCode);
-			throw new SOAPFaultException(soapFault);
-		} catch (SOAPException e) {
-		}
+	private void embedSOAPException(SOAPMessage msg, String reason,
+			String faultCode) throws SOAPException, IOException {
+		SOAPBody soapBody = msg.getSOAPPart().getEnvelope().getBody();
+		SOAPFault soapFault = soapBody.getFault();
+		if (soapFault == null)
+			soapFault = soapBody.addFault();
+		soapFault.setFaultString(reason);
+		soapFault.setFaultCode(faultCode);
+		msg.writeTo(System.out);
 	}
 
 }
