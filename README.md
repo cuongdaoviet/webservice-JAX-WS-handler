@@ -1,4 +1,4 @@
-webservice-JAX-WS-handler
-=========================
+webservice-JAX-WS-Web-Metro
+===========================
 
-A web service with handler/ interceptor using GlassFish Metro. 
+Web service web implementation using GlassFish Metro

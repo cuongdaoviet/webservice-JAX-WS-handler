@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<endpoints
+  xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime"
+  version="2.0">
+  <endpoint
+      name="FooBarWsDocument"
+      implementation="com.techiekernel.ws.jaxws.document.FooBarImpl"
+      url-pattern="/foobar"/>
+  <endpoint
+      name="FooBarWsRpc"
+      implementation="com.techiekernel.ws.jaxws.rpc.FooBarImpl"
+      url-pattern="/foobarRPC"/> 
+  <endpoint
+      name="FileImageServer"
+      implementation="com.techiekernel.ws.jaxws.mtom.FileImageServer"
+      url-pattern="/fileImageServer"/>        
+</endpoints>

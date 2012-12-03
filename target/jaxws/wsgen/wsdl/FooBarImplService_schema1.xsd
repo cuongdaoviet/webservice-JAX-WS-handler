@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://document.jaxws.ws.techiekernel.com/" xmlns:tns="http://document.jaxws.ws.techiekernel.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="callFooBar" type="tns:callFooBar"/>
+
+  <xs:element name="callFooBarResponse" type="tns:callFooBarResponse"/>
+
+  <xs:element name="getServerDetail" type="tns:getServerDetail"/>
+
+  <xs:element name="getServerDetailResponse" type="tns:getServerDetailResponse"/>
+
+  <xs:complexType name="getServerDetail">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getServerDetailResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:server" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="server">
+    <xs:sequence>
+      <xs:element name="ip" type="xs:string" minOccurs="0"/>
+      <xs:element name="mac" type="xs:string" minOccurs="0"/>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
+      <xs:element name="os" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="callFooBar">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="callFooBarResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+
